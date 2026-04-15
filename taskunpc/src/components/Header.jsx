@@ -7,7 +7,7 @@ function Header({ pendientes }) {
       textAlign: "center",
       borderRadius: "8px"
     }}>
-      <h1>📋 TaskUNPC</h1>
+      <h1>TaskUNPC</h1>
       <p>Tareas pendientes: {pendientes}</p>
     </header>
   );

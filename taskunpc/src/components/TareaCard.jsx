@@ -1,18 +1,28 @@
-function TareaCard({ tarea }) {
+import { Link } from 'react-router-dom';
+import { useTareas } from '../context/TareasContext';
+
+function TareaCard({ id, titulo, materia, fecha, completada }) {
+  const { toggleTarea } = useTareas();
+
   return (
     <div style={{
-      border: "1px solid #ccc",
-      padding: "10px",
-      margin: "10px 0",
-      borderRadius: "8px"
+      border: '1px solid #ccc',
+      borderRadius: '8px',
+      padding: '12px',
+      margin: '8px 0',
+      opacity: completada ? 0.6 : 1,
     }}>
-      <h3>{tarea.titulo}</h3>
-      <p><strong>Materia:</strong> {tarea.materia}</p>
-      <p><strong>Fecha:</strong> {tarea.fecha}</p>
-      <p>
-        <strong>Estado:</strong>{" "}
-        {tarea.completada ? "Completada ✅" : "Pendiente ⏳"}
-      </p>
+      <input
+        type="checkbox"
+        checked={completada}
+        onChange={() => toggleTarea(id)}
+      />
+      <span style={{ textDecoration: completada ? 'line-through' : 'none', marginLeft: '8px' }}>
+        <strong>{titulo}</strong>
+      </span>
+      <p>{materia} · {fecha}</p>
+      <p>{completada ? 'Completada' : 'Pendiente'}</p>
+      <Link to={`/tarea/${id}`}>Ver detalle</Link>
     </div>
   );
 }
